@@ -8,7 +8,7 @@ while (!sr.EndOfStream) games.Add(new(sr.ReadLine()!));
 
 Console.WriteLine($"f1: osszesen {games.Count} jatek szerepel a listaban");
 
-var f2 = games.GroupBy(g => g.Year).Where(grp => grp.Count() > 10).OrderBy(grp => grp.Key);
+var f2 = games.GroupBy(g => g.Year).Where(grp => grp.Count() > 10).OrderByDescending(grp => grp.Count());
 Console.WriteLine("f2: ezekben az evekben kerult tobb, mint 10 jatek a listara:");
 foreach (var grp in f2) Console.WriteLine($"\t{grp.Key}: {grp.Count()}db");
 

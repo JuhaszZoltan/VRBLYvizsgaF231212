@@ -48,8 +48,9 @@ namespace BEstGamesGUI
             conn.Open();
             string cmdStr = "SELECT game.id, title, year, genre.name " +
                 "FROM game INNER JOIN genre ON game.genreId = genre.id " +
-                $"WHERE title LIKE '{tbxTitle.Text}%'" +
-                $"{(string.IsNullOrEmpty(cbxGenre.Text) ? ";" : $" AND genre.name = '{cbxGenre.Text}';")}";
+                $"WHERE title LIKE '{tbxTitle.Text}%' " +
+                $"{(string.IsNullOrEmpty(cbxGenre.Text) ? null : $"AND genre.name = '{cbxGenre.Text}' ")}" +
+                $"ORDER BY title ASC;";
             var rdr = new SqlCommand(cmdStr, conn).ExecuteReader();
             while (rdr.Read()) dgvGames.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3]);
 
